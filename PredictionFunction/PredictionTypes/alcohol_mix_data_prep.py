@@ -5,16 +5,28 @@ import numpy as np
 from PredictionFunction.utils.fetch_sales_data import fetch_salesdata
 from PredictionFunction.meta_tables import data
 from PredictionFunction.utils.fetch_weather_data import fetch_weather
+from PredictionFunction.utils.trondheim_sales import sales_without_effect
 
 
 def alcohol_sales_predictor(company, restaurant, start_date, end_date):
     # This function processes the data for the given restaurant and date range.
 
     # Create a pandas DataFrame
-    restaurant_city_df = pd.DataFrame(data)
-
-    filtered_sales_data = fetch_salesdata(company, restaurant, start_date, end_date)
     restaurant_list = pd.DataFrame(data)
+    if restaurant=='Trondheim':
+        filtered_sales_data, actual_trondheim_start_date = (
+        sales_without_effect(
+            restaurant_list["Company"].iloc[0],
+            start_date,
+            end_date,
+            "Karl Johan",
+            "Stavanger",
+        )
+        )
+        filtered_sales_data= filtered_sales_data.rename(columns={'gastronomic_day': 'date'})
+    else:
+        filtered_sales_data = fetch_salesdata(company, restaurant, start_date, end_date)
+    # filtered_sales_data.to_csv("filtered_sales.csv")
     # Convert the filtered SalesData to a DataFrame
     sales_data_df = filtered_sales_data
     end_date = pd.to_datetime(end_date)
