@@ -252,7 +252,7 @@ def oslo_storo(prediction_category,restaurant,merged_data,historical_data,future
     # Different weekly seasonality for 2 weeks in august related to starting fall semester/work 
     df["fall_start"] = df["ds"].apply(is_fall_start)
     df["christmas_shopping"] = df["ds"].apply(is_christmas_shopping)
-    df = add_opening_hours(df,"Oslo Storo",11,11)
+    df = add_opening_hours(df, "Oslo Storo", [11], [11])
 
     oslo_storo_venues = {
         "Ulleval","Cosmopolite, Oslo","Oslo City", 
@@ -513,7 +513,7 @@ def oslo_storo(prediction_category,restaurant,merged_data,historical_data,future
     #future = heavy_rain_winter_weekend_future(future)
     future = heavy_rain_spring_weekday_future(future)
     future = heavy_rain_spring_weekend_future(future)
-    future = add_opening_hours(future,"Oslo Storo",11,11)
+    future = add_opening_hours(future, "Oslo Storo", [11], [11])
     #future = non_heavy_rain_fall_weekend_future(future)
     future.fillna(0, inplace=True)
 

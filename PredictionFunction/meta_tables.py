@@ -27,6 +27,9 @@ data = [
    {"Restaurant": "Oslo Steen_Strom", "City": "Oslo", "Company": "Los Tacos"},
     {"Restaurant": "Oslo Smestad", "City": "Oslo", "Company": "Los Tacos"},
     {"Restaurant": "Sandnes", "City": "Stavanger", "Company": "Los Tacos"},
+    {"Restaurant": "Alexander Kielland", "City": "Oslo", "Company": "Los Tacos"},
+    {"Restaurant": "Bjørvika", "City": "Oslo", "Company": "Los Tacos"},
+    {"Restaurant": "Restaurantdrift AS", "City": "Oslo", "Company": "The Broker"},
       {"Restaurant": "Restaurant","City": "Stavanger","Company": "Fisketorget","Parent Restaurant": "Fisketorget Stavanger",},
       {"Restaurant": "Fisketorget Utsalg","City": "Stavanger","Company": "Fisketorget","Parent Restaurant": "Fisketorget Stavanger",},
 {

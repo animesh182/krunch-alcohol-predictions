@@ -190,7 +190,7 @@ def bergen(prediction_category,restaurant,merged_data,historical_data,future_dat
     #df = heavy_rain_spring_weekday(df)
     df = heavy_rain_spring_weekend(df)
     df = non_heavy_rain_fall_weekend(df)
-    df = add_opening_hours(df, "Bergen",12, 17)
+    df = add_opening_hours(df, "Bergen",[12], [17])
 
     m = Prophet()
 
@@ -733,7 +733,7 @@ def bergen(prediction_category,restaurant,merged_data,historical_data,future_dat
     future["sunshine_amount"] = merged_data["sunshine_amount"]
     future["windspeed"] = merged_data["windspeed"]
     future["air_temperature"] = merged_data["air_temperature"]
-    future = add_opening_hours(future, "Bergen", 12,17)
+    future = add_opening_hours(future, "Bergen", [12],[17])
     future = warm_and_dry_future(future)
     #future = heavy_rain_fall_weekday_future(future)
     #future = heavy_rain_fall_weekend_future(future)

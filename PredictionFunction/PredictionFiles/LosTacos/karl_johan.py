@@ -206,7 +206,7 @@ def karl_johan(prediction_category,restaurant,merged_data,historical_data,future
     # df = warm_dry_weather_spring(df)
     df = calculate_days_15(df, fifteenth_working_days)
     # df = non_heavy_rain_fall_weekend(df)
-    df = add_opening_hours(df, "Karl Johan",12, 17)
+    df = add_opening_hours(df, "Karl Johan", [12], [17])
 
     m = Prophet()
 
@@ -715,7 +715,7 @@ def karl_johan(prediction_category,restaurant,merged_data,historical_data,future
     if prediction_category != "hour":
         future["ds"] = future["ds"].dt.date
     future.fillna(0, inplace=True)
-    future = add_opening_hours(future, "Karl Johan",12, 17)
+    future = add_opening_hours(future, "Karl Johan", [12], [17])
 
     return m, future, df
 

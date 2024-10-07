@@ -249,7 +249,7 @@ def oslo_smestad(prediction_category,restaurant,merged_data,historical_data,futu
 
 
     df["christmas_shopping"] = df["ds"].apply(is_christmas_shopping)
-    df = add_opening_hours(df,"Oslo Storo",11,11)
+    df = add_opening_hours(df, "Oslo Storo", [11], [11])
     # df['not_christmas_shopping'] = ~df['ds'].apply(is_christmas_shopping)
 
     oslo_smestad_venues = {
@@ -421,7 +421,7 @@ def oslo_smestad(prediction_category,restaurant,merged_data,historical_data,futu
    # future = heavy_rain_winter_weekday_future(future)
     #future = heavy_rain_winter_weekend_future(future)
     future = heavy_rain_spring_weekday_future(future)
-    future = add_opening_hours(future,"Oslo Smestad",7,7)
+    future = add_opening_hours(future, "Oslo Smestad", [7], [7])
    # future = heavy_rain_spring_weekend_future(future)
     #future = non_heavy_rain_fall_weekend_future(future)
     future.fillna(0, inplace=True)

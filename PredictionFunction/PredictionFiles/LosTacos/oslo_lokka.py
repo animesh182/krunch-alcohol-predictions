@@ -203,7 +203,7 @@ def oslo_lokka_jtorget_smestad_torggata(prediction_category,restaurant,merged_da
     df["ds"] = pd.to_datetime(df["ds"])
     # Calculate the week number for each date
     df["week_number"] = df["ds"].dt.isocalendar().week
-    df= add_opening_hours(df,"Oslo Lokka",12,17)
+    df = add_opening_hours(df, "Oslo Lokka", [12], [17])
 
     # Convert 'ds' column to datetime if it is not already
     df["ds"] = pd.to_datetime(df["ds"])
@@ -505,7 +505,7 @@ def oslo_lokka_jtorget_smestad_torggata(prediction_category,restaurant,merged_da
     future = heavy_rain_spring_weekday_future(future)
     future = heavy_rain_spring_weekend_future(future)
     future = non_heavy_rain_fall_weekend_future(future)
-    future= add_opening_hours(future,"Oslo Lokka",12,17)
+    future = add_opening_hours(future, "Oslo Lokka", [12], [17])
     future.fillna(0, inplace=True)
 
     return m, future, df

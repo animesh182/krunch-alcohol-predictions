@@ -475,7 +475,7 @@ def oslo_city(prediction_category,restaurant,merged_data,historical_data,future_
     df["fall_start"] = df["ds"].apply(is_fall_start)
 
     df["christmas_shopping"] = df["ds"].apply(is_christmas_shopping)
-    df = add_opening_hours(df, "Oslo City",12, 12)
+    df = add_opening_hours(df, "Oslo City", [12], [12])
     # df['not_christmas_shopping'] = ~df['ds'].apply(is_christmas_shopping)
 
 
@@ -794,7 +794,7 @@ def oslo_city(prediction_category,restaurant,merged_data,historical_data,future_
     #future = non_heavy_rain_fall_weekend_future(future)
     future.fillna(0, inplace=True)
     future = future.drop_duplicates(subset='ds')
-    future = add_opening_hours(future, "Oslo City", 12,12)
+    future = add_opening_hours(future, "Oslo City", [12], [12])
 
     return m, future, df
 
