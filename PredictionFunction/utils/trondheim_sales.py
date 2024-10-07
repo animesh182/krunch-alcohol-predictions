@@ -1,4 +1,4 @@
-from datetime import date,timedelta
+from datetime import date, timedelta
 import pandas as pd
 import decimal
 import random
@@ -26,9 +26,15 @@ def sales_without_effect(company,start_date,end_date,alcohol_reference_restauran
     '''
 
     with psycopg2.connect(**params) as conn:
-        actual_trondheim_sales= pd.read_sql_query(trondheim_query,conn,params=[company,actual_trondheim_start_date,end_date])
-    
-    actual_trondheim_sales['gastronomic_day'] =pd.to_datetime(actual_trondheim_sales['gastronomic_day'])
+        actual_trondheim_sales = pd.read_sql_query(
+            trondheim_query,
+            conn,
+            params=[company, actual_trondheim_start_date, end_date],
+        )
+
+    actual_trondheim_sales["gastronomic_day"] = pd.to_datetime(
+        actual_trondheim_sales["gastronomic_day"]
+    )
 
     actual_trondheim_sales_grouped = actual_trondheim_sales.groupby(['gastronomic_day','article_supergroup'])['total_net'].sum().reset_index()
     final_merged = pd.concat([merged_sales,actual_trondheim_sales_grouped]).reset_index()

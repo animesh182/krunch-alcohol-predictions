@@ -13,20 +13,19 @@ def alcohol_sales_predictor(company, restaurant, start_date, end_date):
 
     # Create a pandas DataFrame
     restaurant_list = pd.DataFrame(data)
-    if restaurant=='Trondheim':
-        filtered_sales_data, actual_trondheim_start_date = (
-        sales_without_effect(
+    if restaurant == "Trondheim":
+        filtered_sales_data, actual_trondheim_start_date = sales_without_effect(
             restaurant_list["Company"].iloc[0],
             start_date,
             end_date,
             "Karl Johan",
             "Stavanger",
         )
+        filtered_sales_data = filtered_sales_data.rename(
+            columns={"gastronomic_day": "date"}
         )
-        filtered_sales_data= filtered_sales_data.rename(columns={'gastronomic_day': 'date'})
     else:
         filtered_sales_data = fetch_salesdata(company, restaurant, start_date, end_date)
-    # filtered_sales_data.to_csv("filtered_sales.csv")
     # Convert the filtered SalesData to a DataFrame
     sales_data_df = filtered_sales_data
     end_date = pd.to_datetime(end_date)
@@ -36,21 +35,24 @@ def alcohol_sales_predictor(company, restaurant, start_date, end_date):
     ).dt.date
 
     alcohol_values = [
-            'Ã˜l',
-            'Alcohol',
-            'Beer',
-            'Beer after 21',
-            'Brennevin',
-            'Cocktails',
-            'Rusbrus/Cider',
-            'Spirits',
-            'Tequila',
-            'Vin',
-            'Wine',
-            'Wine, Taco Tuesday',
-            'Øl',]
+        "Ã˜l",
+        "Alcohol",
+        "Beer",
+        "Beer after 21",
+        "Brennevin",
+        "Cocktails",
+        "Rusbrus/Cider",
+        "Spirits",
+        "Tequila",
+        "Vin",
+        "Wine",
+        "Wine, Taco Tuesday",
+        "Øl",
+    ]
     sales_data_df["article_supergroup"] = sales_data_df.apply(
-        lambda row: row["total_net"] if row["article_supergroup"] in alcohol_values else 0,
+        lambda row: (
+            row["total_net"] if row["article_supergroup"] in alcohol_values else 0
+        ),
         axis=1,
     )
 
@@ -59,7 +61,9 @@ def alcohol_sales_predictor(company, restaurant, start_date, end_date):
     # sales_data_df = sales_data_df[sales_data_df['take_out'] != 'Deliverect Rebate 15%']
     # sales_data_df = sales_data_df.dropna(subset=["take_out"])
 
-    sales_data_df["article_supergroup"] = sales_data_df["article_supergroup"].astype(float)
+    sales_data_df["article_supergroup"] = sales_data_df["article_supergroup"].astype(
+        float
+    )
     # Group the DataFrame by date and calculate total sales and count of transactions per day
     sales_data_df = (
         sales_data_df.groupby("date")
